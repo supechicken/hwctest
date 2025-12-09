@@ -1,0 +1,65 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_library_shared {
+    name: "hwcomposer.hwctest",
+    relative_install_path: "hw",
+    compile_multilib: "both",
+
+    srcs: [
+        "hwcomposer/hwcomposer.cpp",
+        "hwcomposer/fb_sink_devshm.cpp",
+    ],
+
+    header_libs: [
+        "libhardware_headers",
+        "libutils_headers",
+        "libsystem_headers",
+        "libui_headers",
+    ],
+
+    include_dirs: [
+        "hwcomposer",
+    ],
+
+    cflags: [
+        "-DLOG_TAG=\"hwctest\"",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-unused-parameter",
+        "-Wno-unused-variable",
+        "-fno-exceptions",
+        "-fno-rtti",
+    ],
+
+    cppflags: [
+        "-std=c++17",
+    ],
+
+    shared_libs: [
+        "libhardware",
+        "liblog",
+        "libsync",
+        "libcutils",
+        "libutils",
+        "libui",
+        "libnativewindow",
+        "libdrm",
+        "libgbm",
+    ],
+
+    export_include_dirs: [
+        "hwcomposer",
+    ],
+}
+
+filegroup {
+    name: "hwctest_headers",
+    srcs: [
+        "hwcomposer/fb_sink.h",
+        "hwcomposer/display.h",
+        "hwcomposer/modes/waydroid_mode_impl.h",
+    ],
+}
